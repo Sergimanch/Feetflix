@@ -7,3 +7,9 @@ class Persona:
             self.__correo_electronico = correo_electronico
             self.__numero_telefono = numero_telefono
             self.__contraseña = contraseña
+            @property
+            def getNombre (self):
+                return self.__nombre
+            @nombre.setter
+            def setNombre(self, nombre):
+                self.__nombre = nombre
