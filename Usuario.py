@@ -1,6 +1,6 @@
 from Persona import Persona
 class Usuario(Persona):
-    def __init__(self,id_user, nombre_user, idioma_fav, metodo_pago):
+    def __init__(self,nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password,id_user, nombre_user, idioma_fav, metodo_pago):
             super().__init__(nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password)
             self.__id_user = id_user
             self.__nombre_user = nombre_user
