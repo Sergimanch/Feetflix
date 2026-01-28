@@ -46,11 +46,11 @@ class Usuario(Persona):
         if contenido not in self.__lista_favoritos:
             self.__lista_favoritos.append(contenido)
     
-    def ver_lista_favoritos(self):
+    def ver_lista_favoritos(self)->list:
         """Devuelve la lista de contenidos favoritos."""
         return self.__lista_favoritos
 
-    def buscar_contenido_por_titulo(self, titulo: str, catalogo_contenidos: list):
+    def buscar_contenido_por_titulo(self, titulo: str, catalogo_contenidos: list)->list:
         """
         Busca contenidos por título dentro de un catálogo (lista de Contenido).
         Devuelve una lista con las coincidencias.
@@ -61,7 +61,7 @@ class Usuario(Persona):
                 resultados.append(c)
         return resultados
 
-    def filtrar_contenido_por_genero(self, genero: str, catalogo_contenidos: list):
+    def filtrar_contenido_por_genero(self, genero: str, catalogo_contenidos: list)->list:
         """
         Filtra contenidos por género dentro de un catálogo (lista de Contenido).
         Devuelve una lista con las coincidencias.
