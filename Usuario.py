@@ -6,6 +6,10 @@ class Usuario(Persona):
             self.__nombre_user = nombre_user
             self.__idioma_fav = idioma_fav
             self.__metodo_pago = metodo_pago
+
+
+            self.__lista_favoritos = []      # lista de Contenido
+
     
     @property
     def id_user (self)->str:
@@ -36,3 +40,34 @@ class Usuario(Persona):
     @metodo_pago.setter
     def metodo_pago(self, metodo_pago:str):
         self.__metodo_pago = metodo_pago
+
+    def añadir_a_lista(self, contenido):
+        """Añade un contenido a la lista de favoritos si no está ya."""
+        if contenido not in self.__lista_favoritos:
+            self.__lista_favoritos.append(contenido)
+    
+    def ver_lista_favoritos(self):
+        """Devuelve la lista de contenidos favoritos."""
+        return self.__lista_favoritos
+
+    def buscar_contenido_por_titulo(self, titulo: str, catalogo_contenidos: list):
+        """
+        Busca contenidos por título dentro de un catálogo (lista de Contenido).
+        Devuelve una lista con las coincidencias.
+        """
+        resultados = []
+        for c in catalogo_contenidos:
+            if titulo.lower() in c.titulo.lower():
+                resultados.append(c)
+        return resultados
+
+    def filtrar_contenido_por_genero(self, genero: str, catalogo_contenidos: list):
+        """
+        Filtra contenidos por género dentro de un catálogo (lista de Contenido).
+        Devuelve una lista con las coincidencias.
+        """
+        resultados = []
+        for c in catalogo_contenidos:
+            if c.genero.lower() == genero.lower():
+                resultados.append(c)
+        return resultados
