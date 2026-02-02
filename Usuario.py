@@ -1,6 +1,6 @@
 from Persona import Persona
 class Usuario(Persona):
-    def __init__(self,nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password,id_user, nombre_user, idioma_fav, metodo_pago):
+    def __init__(self,nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password, historial, id_user, nombre_user, idioma_fav, metodo_pago):
             super().__init__(nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password)
             self.__id_user = id_user
             self.__nombre_user = nombre_user
@@ -9,6 +9,8 @@ class Usuario(Persona):
 
 
             self.__lista_favoritos = []      # lista de Contenido
+
+            self.__historial = []
 
     
     @property
@@ -41,6 +43,14 @@ class Usuario(Persona):
     def metodo_pago(self, metodo_pago:str):
         self.__metodo_pago = metodo_pago
 
+    @property
+    def historial (self)->str:
+        return self.__historial
+    @historial.setter
+    def historial(self, historial:str):
+        self.__historial = historial
+
+
     def añadir_a_lista(self, contenido):
         """Añade un contenido a la lista de favoritos si no está ya."""
         if contenido not in self.__lista_favoritos:
@@ -71,3 +81,20 @@ class Usuario(Persona):
             if c.genero.lower() == genero.lower():
                 resultados.append(c)
         return resultados
+    #Cuando el usuario vea un contenido, se añadirá al historial
+    def ver_contenido(self, contenido):
+        self.__historial.append(contenido)
+    
+    def ver_historial(self):
+        """
+        Muestra el historial de contenidos vistos/jugados,
+        indicando título, tipo (película, serie, juego) y género.
+        """
+        if not self.__historial:
+            print("Todavía no has visto ningún contenido.")
+            return
+
+        print("Historial de contenidos:")
+        for i, c in enumerate(self.__historial, start=1):
+            tipo = c.__class__.__name__      # Obtengo el tipo de contenido
+            print(f"{i}. [{tipo}] {c.titulo} - Género: {c.genero}")
