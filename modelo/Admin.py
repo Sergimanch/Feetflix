@@ -1,4 +1,4 @@
-from Persona import Persona
+from modelo.Persona import Persona
 
 class Admin(Persona):
     def __init__(self, nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password, id_admin, categoria_trabajo):

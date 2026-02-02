@@ -1,6 +1,6 @@
 from datetime import date
 from typing import List
-from Contenido import Contenido
+from modelo.Contenido import Contenido
 
 
 class Pelicula(Contenido):

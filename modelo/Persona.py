@@ -49,3 +49,12 @@ class Persona:
     @password.setter
     def password(self, password: str):
         self.__password = password
+
+    def actualizar_perfil(self, nombre, apellido, dni, direccion, correo_electronico, numero_telefono):
+            self.__nombre = nombre
+            self.__apellido = apellido
+            self.__dni = dni
+            self.__direccion = direccion
+            self.__correo_electronico = correo_electronico
+            self.__numero_telefono = numero_telefono
+        return f"Nombre: {self.__nombre}

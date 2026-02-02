@@ -1,4 +1,4 @@
-import Contenido
+import modelo.Contenido as Contenido
 
 class Juegos(Contenido):
     def __init__(self, categoria, nombre, descripcion, duracion, fecha_lanzamiento, plataformas_disponibles : list[str], multijugador : bool, tiempo_jugado : int):

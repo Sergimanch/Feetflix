@@ -1,4 +1,4 @@
-from Contenido import Contenido
+from modelo.Contenido import Contenido
 
 class Series(Contenido):
     def __init__(self, categoria, nombre, descripcion, duracion, fecha_lanzamiento, num_temporadas: int, en_emision: bool):
