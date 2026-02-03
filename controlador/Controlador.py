@@ -1,6 +1,7 @@
 from modelo.Contenido import Contenido
 from modelo.Usuario import Usuario
 from modelo.Admin import Admin
+<<<<<<< HEAD
 from modelo.Peliculas import Pelicula
 from modelo.Series import Series
 from modelo.Juegos import Juegos
@@ -12,10 +13,18 @@ from typing import List
 class Controlador:
     """
     Controlador principal. Coordina Vista y Modelo.
+=======
+from vista.Vista import Vista
+
+class Controlador:
+    """
+    Controlador principal. Coordina Vista ↔ Modelo.
+>>>>>>> b08c990b998fff18dc3a642e534cc80f23ecc02e
     Mantiene listas de usuarios, admins y catálogo.
     """
 
     def __init__(self):
+<<<<<<< HEAD
         self.catalogo: List[Contenido] = []
         self.usuarios: List[Usuario] = []
         self.admins: List[Admin] = []
@@ -268,3 +277,11 @@ class Controlador:
             else:
                 self.vista.mostrar_mensaje("Opción inválida.")
             self.vista.limpiar_pantalla()
+=======
+        self.__catalogo: list[Contenido] = []
+        self.__usuarios: list[Usuario] = []
+        self.__admins: list[Admin] = []
+        self.__vista = Vista()
+        self.__usuario_actual = None
+        self.__admin_actual = None
+>>>>>>> b08c990b998fff18dc3a642e534cc80f23ecc02e
