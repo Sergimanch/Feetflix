@@ -1,4 +1,5 @@
 from modelo.Persona import Persona
+from modelo.Contenido import Contenido
 class Usuario(Persona):
     def __init__(self,nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password,id_user, nombre_user, idioma_fav, metodo_pago):
             super().__init__(nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password)
@@ -6,7 +7,7 @@ class Usuario(Persona):
             self.__nombre_user = nombre_user
             self.__idioma_fav = idioma_fav
             self.__metodo_pago = metodo_pago
-            self.__lista_favoritos = []      # lista de Contenido
+            self.__lista_favoritos = list[Contenido]=[]      # lista de Contenido
 
     
     @property
@@ -39,12 +40,12 @@ class Usuario(Persona):
     def metodo_pago(self, metodo_pago:str):
         self.__metodo_pago = metodo_pago
 
-    def añadir_a_lista(self, contenido):
+    def añadir_a_lista(self, contenido: Contenido)-> None:
         """Añade un contenido a la lista de favoritos si no está ya."""
         if contenido not in self.__lista_favoritos:
             self.__lista_favoritos.append(contenido)
     
-    def ver_lista_favoritos(self)->list:
+    def ver_lista_favoritos(self)->list[Contenido]:
         """Devuelve la lista de contenidos favoritos."""
         return self.__lista_favoritos
 
@@ -53,7 +54,7 @@ class Usuario(Persona):
         Busca contenidos por título dentro de un catálogo (lista de Contenido).
         Devuelve una lista con las coincidencias.
         """
-        resultados = []
+        resultados = list[Contenido]=[]
         for c in catalogo_contenidos:
             if titulo.lower() in c.titulo.lower():
                 resultados.append(c)
@@ -64,8 +65,26 @@ class Usuario(Persona):
         Filtra contenidos por género dentro de un catálogo (lista de Contenido).
         Devuelve una lista con las coincidencias.
         """
-        resultados = []
+        resultados = list[Contenido]=[]
         for c in catalogo_contenidos:
             if c.genero.lower() == genero.lower():
                 resultados.append(c)
         return resultados
+    
+    def reproducir_contenido(self, contenido: Contenido, edad_usuario: int):
+        """
+        Reproduce el contenido si es apto para la edad del usuario.
+        """
+        if contenido.es_apto_para_edad(edad_usuario):
+            contenido.reproducir()
+        else:
+            print("Contenido no apto para tu edad.")
+
+    def valorar_contenido(self, contenido: Contenido, nota: int):
+        """
+        Añade una valoración al contenido.
+        """
+        contenido.añadir_valoracion(nota)
+
+    def __str__(self) -> str:
+        return f"Usuario {self.__nombre_user} (ID: {self.__id_user})"

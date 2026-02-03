@@ -50,11 +50,11 @@ class Persona:
     def password(self, password: str):
         self.__password = password
 
-    def actualizar_perfil(self, nombre, apellido, dni, direccion, correo_electronico, numero_telefono):
+    def actualizar_perfil(self, nombre, apellido, dni, direccion, correo_electronico, numero_telefono)-> str:
             self.__nombre = nombre
             self.__apellido = apellido
             self.__dni = dni
             self.__direccion = direccion
             self.__correo_electronico = correo_electronico
             self.__numero_telefono = numero_telefono
-        return f"Nombre: {self.__nombre}
+            return f"Perfil actualizado: {self.__nombre} {self.__apellido}, ({self.__dni})"
