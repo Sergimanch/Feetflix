@@ -1,8 +1,8 @@
-import modelo.Contenido as Contenido
-
+from modelo.Contenido import Contenido
+from datetime import date
 class Juegos(Contenido):
-    def __init__(self, categoria, nombre, descripcion, duracion, fecha_lanzamiento, plataformas_disponibles : list[str], multijugador : bool, tiempo_jugado : int):
-        super().__init__(categoria, nombre, descripcion, duracion, fecha_lanzamiento)
+    def __init__(self, id_contenido: int, titulo: str, descripcion: str, genero: str, edad_minima: int, duracion_minutos: int, fecha_estreno: date, plataformas_disponibles : list[str], multijugador : bool, tiempo_jugado : int):
+        super().__init__(id_contenido, titulo, descripcion, genero, edad_minima, duracion_minutos, fecha_estreno )
         self.__plataformas_disponibles = plataformas_disponibles ## Movil, Consola o PC
         self.__multijuador = multijugador
         self.__tiempo_jugado = tiempo_jugado

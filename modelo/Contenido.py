@@ -1,18 +1,16 @@
 from datetime import date
 
 class Contenido:
-    def __init__(self, categoria, nombre, descripcion, duracion, fecha_estreno, id_contenido, titulo, genero, edad_minima, num_visualizaciones, valoraciones):
-        self.__categoria = categoria
-        self.__nombre = nombre
-        self.__descripcion = descripcion
-        self.__duracion = duracion
-        self.__fecha_estreno = fecha_estreno
+    def __init__(self, id_contenido: int, titulo: str, descripcion: str, genero: str, edad_minima: int, duracion_minutos: int, fecha_estreno: date):
         self.__id_contenido = id_contenido
         self.__titulo = titulo
+        self.__descripcion = descripcion
         self.__genero = genero
         self.__edad_minima = edad_minima
-        self.__num_visualizaciones = num_visualizaciones
-        self.__valoraciones = valoraciones
+        self.__duracion_minutos = duracion_minutos
+        self.__fecha_estreno = fecha_estreno
+        self.__num_visualizaciones = 0
+        self.__valoraciones = []
 
 # Getters y Setters de los atributos de la clase contenido
     @property
