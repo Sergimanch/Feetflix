@@ -49,14 +49,14 @@ class Admin(Persona):
             contenido.genero = nuevos_datos["genero"]
         print(f"Contenido {contenido.id_contenido} editado con nuevos datos.")
 
-    def bloquear_usuario(self, usuario) -> None:
+    def bloquear_usuario(self, usuario:Usuario) -> None:
         """Cambia el estado de un usuario a bloqueado."""
         if usuario.id_user not in self.__usuarios_bloqueados:
             self.__usuarios_bloqueados.append(usuario.id_user)
             usuario.esta_bloqueado = True
             print(f"Usuario {usuario.id_user} ha sido bloqueado.")
 
-    def desbloquear_usuario(self, usuario) -> None:
+    def desbloquear_usuario(self, usuario:Usuario) -> None:
         """Restaura el acceso a un usuario bloqueado."""
         if usuario.id_user in self.__usuarios_bloqueados:
             self.__usuarios_bloqueados.remove(usuario.id_user)
