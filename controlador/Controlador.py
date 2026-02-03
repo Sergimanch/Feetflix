@@ -1,7 +1,11 @@
+"""
+CONTROLADOR PRINCIPAL - FEETFLIX DAM
+Coordina Vista ↔ Modelo siguiendo patrón MVC
+"""
+
 from modelo.Contenido import Contenido
 from modelo.Usuario import Usuario
 from modelo.Admin import Admin
-<<<<<<< HEAD
 from modelo.Peliculas import Pelicula
 from modelo.Series import Series
 from modelo.Juegos import Juegos
@@ -12,19 +16,11 @@ from typing import List
 
 class Controlador:
     """
-    Controlador principal. Coordina Vista y Modelo.
-=======
-from vista.Vista import Vista
-
-class Controlador:
-    """
     Controlador principal. Coordina Vista ↔ Modelo.
->>>>>>> b08c990b998fff18dc3a642e534cc80f23ecc02e
     Mantiene listas de usuarios, admins y catálogo.
     """
 
     def __init__(self):
-<<<<<<< HEAD
         self.catalogo: List[Contenido] = []
         self.usuarios: List[Usuario] = []
         self.admins: List[Admin] = []
@@ -32,7 +28,10 @@ class Controlador:
         self.usuario_actual: Usuario | None = None
         self.admin_actual: Admin | None = None
 
+    # ========== MÉTODOS DE DEMO ==========
+    
     def crear_contenido_demo(self):
+        """Crea contenidos de prueba para la demo."""
         # Crear película
         reparto = ["Actor1", "Actor2"]
         peli = Pelicula(
@@ -86,9 +85,10 @@ class Controlador:
         )
         self.admins.append(admin1)
 
-    #MENÚ PRINCIPAL
+    # ========== MENÚ PRINCIPAL ==========
 
     def mostrar_menu_principal(self):
+        """Muestra menú principal de la aplicación."""
         print("FEETFLIX")
         print()
         print("1. Iniciar sesión como Usuario")
@@ -96,9 +96,10 @@ class Controlador:
         print("3. Salir")
 
     def pedir_id_usuario(self):
+        """Solicita ID para login."""
         return self.vista.pedir_id_usuario()
 
-    #SESIONES
+    # ========== SESIONES ==========
 
     def login_usuario(self, id_user: str) -> bool:
         """Busca y establece usuario actual por ID."""
@@ -121,14 +122,16 @@ class Controlador:
         return False
 
     def salir_usuario(self):
+        """Cierra sesión de usuario."""
         self.usuario_actual = None
         self.vista.mostrar_mensaje("Sesión cerrada.")
 
     def salir_admin(self):
+        """Cierra sesión de admin."""
         self.admin_actual = None
         self.vista.mostrar_mensaje("Sesión de admin cerrada.")
 
-    #MENÚ USUARIO
+    # ========== MENÚ USUARIO ==========
 
     def manejar_menu_usuario(self):
         """Maneja el menú del usuario actual."""
@@ -152,6 +155,7 @@ class Controlador:
             self.vista.pausar()
 
     def buscar_por_titulo(self):
+        """Ejecuta búsqueda por título."""
         titulo = self.vista.pedir_titulo_busqueda()
         resultados = self.usuario_actual.buscar_contenido_por_titulo(titulo, self.catalogo)
         self.vista.mostrar_resultados_busqueda(resultados)
@@ -159,21 +163,24 @@ class Controlador:
             self.manejar_contenido(resultados[0])
 
     def ver_catalogo(self):
+        """Muestra catálogo completo."""
         self.vista.mostrar_catalogo(self.catalogo)
         if self.catalogo:
             self.manejar_contenido(self.catalogo[0])
 
     def filtrar_por_genero(self):
+        """Filtra contenidos por género."""
         genero = self.vista.pedir_genero()
         resultados = self.usuario_actual.filtrar_contenido_por_genero(genero, self.catalogo)
         self.vista.mostrar_resultados_busqueda(resultados)
 
     def ver_favoritos(self):
+        """Muestra favoritos del usuario."""
         favoritos = self.usuario_actual.ver_lista_favoritos()
         self.vista.mostrar_catalogo(favoritos)
 
     def manejar_contenido(self, contenido: Contenido):
-        """Muestra opciones para un contenido específico."""
+        """Menú de acciones para contenido específico."""
         self.vista.mostrar_detalle_contenido(contenido)
         self.vista.mostrar_menu_contenido()
         opcion = self.vista.pedir_opcion()
@@ -191,7 +198,7 @@ class Controlador:
         elif opcion == "4":
             return
 
-    #MENÚ ADMIN
+    # ========== MENÚ ADMIN ==========
 
     def manejar_menu_admin(self):
         """Maneja el menú del admin actual."""
@@ -220,11 +227,13 @@ class Controlador:
             self.vista.pausar()
 
     def crear_contenido_admin(self):
+        """Simula creación de contenido nuevo."""
         print("\nCrear contenido (simulado - usa datos de demo)")
         self.vista.mostrar_mensaje("En una versión completa pedirías todos los datos.")
         self.crear_contenido_demo()
 
     def bloquear_usuario_admin(self):
+        """Bloquea usuario seleccionado."""
         id_user = self.vista.pedir_id_usuario()
         for usuario in self.usuarios:
             if usuario.id_user == id_user:
@@ -234,6 +243,7 @@ class Controlador:
             self.vista.mostrar_mensaje("Usuario no encontrado.")
 
     def desbloquear_usuario_admin(self):
+        """Desbloquea usuario seleccionado."""
         id_user = self.vista.pedir_id_usuario()
         for usuario in self.usuarios:
             if usuario.id_user == id_user:
@@ -243,6 +253,7 @@ class Controlador:
             self.vista.mostrar_mensaje("Usuario no encontrado.")
 
     def ver_estadisticas_admin(self):
+        """Muestra estadísticas de contenido."""
         id_contenido = self.vista.pedir_id_contenido()
         for c in self.catalogo:
             if c.id_contenido == id_contenido:
@@ -251,7 +262,7 @@ class Controlador:
         else:
             self.vista.mostrar_mensaje("Contenido no encontrado.")
 
-    #EJECUCIÓN PRINCIPAL
+    # ========== EJECUCIÓN PRINCIPAL ==========
 
     def ejecutar(self):
         """Bucle principal de la aplicación."""
@@ -277,11 +288,3 @@ class Controlador:
             else:
                 self.vista.mostrar_mensaje("Opción inválida.")
             self.vista.limpiar_pantalla()
-=======
-        self.__catalogo: list[Contenido] = []
-        self.__usuarios: list[Usuario] = []
-        self.__admins: list[Admin] = []
-        self.__vista = Vista()
-        self.__usuario_actual = None
-        self.__admin_actual = None
->>>>>>> b08c990b998fff18dc3a642e534cc80f23ecc02e
