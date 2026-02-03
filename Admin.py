@@ -1,6 +1,6 @@
-from modelo.Persona import Persona
-from modelo.Contenido import Contenido
-from modelo.Usuario import Usuario
+from Persona import Persona
+from Contenido import Contenido
+from Usuario import Usuario
 class Admin(Persona):
     def __init__(self, nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password, id_admin, categoria_trabajo):
         super().__init__(nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password)
@@ -23,13 +23,16 @@ class Admin(Persona):
     @categoria_trabajo.setter
     def categoria_trabajo(self, valor: str):
         self.__categoria_trabajo = valor
-
-    def crear_contenido(self, contenido: Contenido, catalogo: list[Contenido]) -> None:
+    @property
+    def usuarios_bloqueados(self):
+        return self.__usuarios_bloqueados
+    
+    def crear_contenido(self, contenido: Contenido, catalogo) -> None:
         """Añade un nuevo objeto de contenido al sistema."""
         catalogo.append(contenido)
         print(f"Admin {self.nombre}: creando nuevo contenido '{contenido.titulo}'...")
 
-    def eliminar_contenido(self, id_contenido: int, catalogo: list[Contenido]) -> bool:
+    def eliminar_contenido(self, id_contenido: int, catalogo) -> bool:
         """Elimina contenido por su ID. Devuelve True si tuvo éxito."""
         for c in catalogo:
             if c.id_contenido == id_contenido:
@@ -47,7 +50,7 @@ class Admin(Persona):
             contenido.descripcion = nuevos_datos["descripcion"]
         if "genero" in nuevos_datos:
             contenido.genero = nuevos_datos["genero"]
-        print(f"Contenido {contenido.id_contenido} editado con nuevos datos.")
+        print(f"Contenido {contenido.__id_contenido} editado con nuevos datos.")
 
     def bloquear_usuario(self, usuario:Usuario) -> None:
         """Cambia el estado de un usuario a bloqueado."""
@@ -75,10 +78,14 @@ class Admin(Persona):
     def listar_usuarios(self, lista_usuarios: list) -> None:
         """Muestra por consola la lista de todos los usuarios."""
         print("Listado de usuarios:")
-        for u, b in lista_usuarios:
+        for u in lista_usuarios:
+            print(f"- {u} ")
+    def listar_usuarios_bloqueados(self) -> None:
+        """Muestra por consola la lista de usuarios bloqueados."""
+        print("Usuarios bloqueados:")
+        for u in self.__usuarios_bloqueados:
             print(f"- {u}")
-
-    def listar_contenidos(self, catalogo : list[Contenido]) -> None:
+    def listar_contenidos(self, catalogo) -> None:
         """Muestra por consola el catálogo completo."""
         print("Catálogo de la plataforma: ")
         for c  in catalogo:

@@ -14,7 +14,12 @@ class Contenido:
 
 # Getters y Setters de los atributos de la clase contenido
 
-
+    @property
+    def id_contenido(self) -> int:
+        return self.__id_contenido
+    @id_contenido.setter
+    def id_contenido(self, id_contenido: int):
+        self.__id_contenido = id_contenido
     @property
     def titulo(self) -> str:
         return self.__titulo
@@ -43,13 +48,6 @@ class Contenido:
     def fecha_estreno(self, fecha_estreno: date):
         self.__fecha_estreno = fecha_estreno    
 
-    @property
-    def titulo(self) -> str:
-        return self.__titulo
-    @titulo.setter
-    def titulo(self, titulo: str):
-        self.__titulo = titulo
-    
     @property
     def genero(self) -> str:
         return self.__genero
@@ -102,7 +100,7 @@ class Contenido:
             f"Título: {self.__titulo}\n"
             f"Género: {self.__genero}\n"
             f"Descripción: {self.__descripcion}\n"
-            f"Duración: {self.__duracion} minutos\n"
+            f"Duración: {self.__duracion_minutos} minutos\n"
             f"Fecha de Estreno: {self.__fecha_estreno}\n"
             f"Edad Mínima: {self.__edad_minima} años\n"
             f"Número de Visualizaciones: {self.__num_visualizaciones}\n"

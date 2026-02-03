@@ -1,16 +1,16 @@
 from datetime import date
-from typing import List
-from modelo.Contenido import Contenido
+
+from Contenido import Contenido
 
 
-class Pelicula(Contenido):
+class Peliculas(Contenido):
     """Clase Película que hereda de Contenido.
     
     Representa una película con atributos específicos como director,
     reparto, idiomas y formatos disponibles.
     """
     
-    def __init__(self, id_contenido: int, titulo: str, descripcion: str, genero: str, edad_minima: int, duracion_minutos: int, fecha_estreno: date, director: str, reparto_principal: List[str], idioma_original: str,formato: str = "HD"):
+    def __init__(self, id_contenido: int, titulo: str, descripcion: str, genero: str, edad_minima: int, duracion_minutos: int, fecha_estreno: date, director: str, reparto_principal, idioma_original: str,formato: str = "HD"):
         # Inicializar la clase padre
         super().__init__(id_contenido, titulo, descripcion, genero, edad_minima, duracion_minutos, fecha_estreno)
         # Atributos privados específicos de Película
@@ -31,11 +31,11 @@ class Pelicula(Contenido):
     
     # Properties para reparto_principal
     @property
-    def reparto_principal(self) -> List[str]:
+    def reparto_principal(self):
         return self.__reparto_principal
     
     @reparto_principal.setter
-    def reparto_principal(self, reparto_principal: List[str]):
+    def reparto_principal(self, reparto_principal):
         self.__reparto_principal = reparto_principal
     
     # Properties para idioma_original
@@ -49,11 +49,11 @@ class Pelicula(Contenido):
     
     # Properties para subtitulos_disponibles
     @property
-    def subtitulos_disponibles(self) -> List[str]:
+    def subtitulos_disponibles(self):
         return self.__subtitulos_disponibles
     
     @subtitulos_disponibles.setter
-    def subtitulos_disponibles(self, subtitulos_disponibles: List[str]):
+    def subtitulos_disponibles(self, subtitulos_disponibles):
         self.__subtitulos_disponibles = subtitulos_disponibles
     
     # Properties para formato
@@ -65,11 +65,7 @@ class Pelicula(Contenido):
     def formato(self, formato: str):
         self.__formato = formato
     
-    # Métodos específicos de Película
-    def es_largometraje(self) -> bool:
-        """Verifica si la película es un largometraje (>= 60 minutos)."""
-        return self.duracion_minutos >= 60
-    
+    # Métodos específicos de Películas
     def listar_reparto(self) -> str:
         """Devuelve una cadena con el reparto principal."""
         if not self.__reparto_principal:
@@ -103,19 +99,15 @@ class Pelicula(Contenido):
         """
         if idioma not in self.__subtitulos_disponibles:
             self.__subtitulos_disponibles.append(idioma)
-            print(f"Subtítulos en {idioma} añadidos a {self.titulo}")
+            print(f"Subtítulos en {idioma} añadidos a {self.__titulo}")
         else:
             print(f"Los subtítulos en {idioma} ya están disponibles")
     
-    def mostrar_info_detallada(self) -> str:
+    def info_peli_detallada(self) -> str:
         """Devuelve información detallada de la película."""
         info_base = super().mostrar_info_detallada()
-        tipo = "Largometraje" if self.es_largometraje() else "Cortometraje"
         subtitulos = ", ".join(self.__subtitulos_disponibles) if self.__subtitulos_disponibles else "Ninguno"
-        
-        info_pelicula = (f"\n--- Información específica de Película ---\n"
-                        f"Tipo: {tipo}\n"
-                        f"Director: {self.__director}\n"
+        info_pelicula = (f"Director: {self.__director}\n"
                         f"Reparto: {self.listar_reparto()}\n"
                         f"Idioma original: {self.__idioma_original}\n"
                         f"Subtítulos disponibles: {subtitulos}\n"
@@ -125,9 +117,9 @@ class Pelicula(Contenido):
     
     def __str__(self) -> str:
         """Representación en string de la película."""
-        return f"Película: {self.titulo} ({self.fecha_estreno.year}) - Dir: {self.__director}"
+        return f"Película: {self.__titulo} ({self.__fecha_estreno.year}) - Dir: {self.__director}"
     
     def __repr__(self) -> str:
         """Representación técnica de la película."""
-        return (f"Pelicula(id={self.id_contenido}, titulo='{self.titulo}', "
-                f"director='{self.__director}', duracion={self.duracion_minutos}min)")
+        return (f"Pelicula(id={self.__id_contenido}, titulo='{self.__titulo}', "
+                f"director='{self.__director}', duracion={self.__duracion_minutos}min)")

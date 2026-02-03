@@ -1,7 +1,3 @@
-from modelo.Contenido import Contenido
-from modelo.Usuario import Usuario
-from modelo.Admin import Admin
-
 class Vista:
 
     def mostrar_menu_usuario(self, usuario) -> None:
@@ -21,17 +17,19 @@ class Vista:
         print("4. Bloquear usuario")
         print("5. Desbloquear usuario")
         print("6. Ver estadísticas de un contenido")
-        print("7. Cerrar sesión")
+        print("7. Listar usuarios")
+        print("8. Listar usuarios bloqueados")
+        print("9. Cerrar sesión")
 
     def mostrar_menu_contenido(self):
-        print("\n Acciones sobre contenido:) ")
+        print("\n Acciones sobre contenido: ")
         print("1. Reproducir")
         print("2. Añadir a favoritos")
         print("3. Valorar")
         print("4. Volver")
 
     def mostrar_detalle_contenido(self, contenido):
-        print("\nDetalles del contenido")
+        print("\nDetalles del contenido: ")
         print(contenido.mostrar_info_detallada())
 
     def pedir_opcion(self, mensaje="Elige una opción: ") -> str:
@@ -44,37 +42,37 @@ class Vista:
         input("Pulsa ENTER para continuar...")
 
     def mostrar_catalogo(self, contenidos: list):
-        print("Catálogo: ")
+        print("\nCatálogo: ")
         if not contenidos:
             print("No hay contenidos disponibles.")
         for i, c in enumerate(contenidos, 1):
             print(f"{i}. {c.mostrar_info_resumida()}")
     
     def mostrar_resultados_busqueda(self, resultados: list):
-        print("Resultados de búsqueda: ")
+        print("\nResultados de búsqueda: ")
         if not resultados:
             print("No se encontraron contenidos.")
         for i, c in enumerate(resultados, 1):
-            print(f"{i}. {c.mostrar_info_resumida()}")
+            print(f"{i}. {c.mostrar_info_detallada()}")
 
     def pedir_titulo_busqueda(self) -> str:
-        return input("Introduce el título  a buscar: ")
+        return input("\nIntroduce el título a buscar: ")
     
     def pedir_genero(self) -> str:
-        return input("Introduce el género: ")
+        return input("\nIntroduce el género: ")
 
     def mostrar_detalle_contenido(self, contenido):
         print("\nDetalles del contenido: ")
-        print(contenido.mostrar_info_detallada())
+        print(contenido.mostrar_info_resumida())
     
     def pedir_id_contenido(self) -> int:
-        return int(input("Introduce el ID del contenido: "))
+        return int(input("\nIntroduce el ID del contenido: "))
 
     def pedir_id_usuario(self) -> str:
-        return input("Introduce el ID del usuario: ")
+        return input("\nIntroduce el ID del usuario: ")
 
     def mostrar_lista_usuarios(self, usuarios: list):
-        print("\n=== Usuarios registrados ===")
+        print("\nUsuarios registrados:")
         if not usuarios:
             print("No hay usuarios.")
         for u in usuarios:

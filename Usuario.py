@@ -1,13 +1,14 @@
-from modelo.Persona import Persona
-from modelo.Contenido import Contenido
+from Persona import Persona
+from Contenido import Contenido
+
 class Usuario(Persona):
-    def __init__(self,nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password,id_user, nombre_user, idioma_fav, metodo_pago):
+    def __init__(self,nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password, id_user, nombre_user, idioma_fav, metodo_pago):
             super().__init__(nombre, apellido, dni, direccion, correo_electronico, numero_telefono, password)
             self.__id_user = id_user
             self.__nombre_user = nombre_user
             self.__idioma_fav = idioma_fav
             self.__metodo_pago = metodo_pago
-            self.__lista_favoritos = list[Contenido]=[]
+            self.__lista_favoritos = []
             self.__esta_bloqueado = False
 
     def _comprobar_bloqueo(self) -> bool:
@@ -64,7 +65,7 @@ class Usuario(Persona):
         if contenido not in self.__lista_favoritos:
             self.__lista_favoritos.append(contenido)
     
-    def ver_lista_favoritos(self)->list[Contenido]:
+    def ver_lista_favoritos(self):
         """Devuelve la lista de contenidos favoritos."""
         if not self._comprobar_bloqueo():
             return []
@@ -77,7 +78,7 @@ class Usuario(Persona):
         """
         if not self._comprobar_bloqueo():
             return []
-        resultados = list[Contenido]=[]
+        resultados=[]
         for c in catalogo_contenidos:
             if titulo.lower() in c.titulo.lower():
                 resultados.append(c)
@@ -90,7 +91,7 @@ class Usuario(Persona):
         """
         if not self._comprobar_bloqueo():
             return []
-        resultados = list[Contenido]=[]
+        resultados =[]
         for c in catalogo_contenidos:
             if c.genero.lower() == genero.lower():
                 resultados.append(c)

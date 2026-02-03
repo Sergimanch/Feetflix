@@ -1,4 +1,4 @@
-from modelo.Contenido import Contenido
+from Contenido import Contenido
 from datetime import date
 
 class Series(Contenido):
