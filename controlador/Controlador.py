@@ -1,6 +1,6 @@
 """
 CONTROLADOR PRINCIPAL - FEETFLIX DAM
-Coordina Vista ↔ Modelo siguiendo patrón MVC
+Coordina Vista y Modelo siguiendo patrón MVC
 """
 
 from modelo.Contenido import Contenido
@@ -16,7 +16,6 @@ from typing import List
 
 class Controlador:
     """
-    Controlador principal. Coordina Vista ↔ Modelo.
     Mantiene listas de usuarios, admins y catálogo.
     """
 
@@ -28,10 +27,10 @@ class Controlador:
         self.usuario_actual: Usuario | None = None
         self.admin_actual: Admin | None = None
 
-    # ========== MÉTODOS DE DEMO ==========
+    #MÉTODOS
     
-    def crear_contenido_demo(self):
-        """Crea contenidos de prueba para la demo."""
+    def crear_contenido(self):
+        """Crea contenidos de prueba."""
         # Crear película
         reparto = ["Actor1", "Actor2"]
         peli = Pelicula(
@@ -60,7 +59,7 @@ class Controlador:
         )
         self.catalogo.append(juego)
 
-    def registrar_usuario_demo(self):
+    def registrar_usuario(self):
         """Crea usuarios de prueba."""
         persona1 = Persona("Juan", "Pérez", "12345678A", "Calle Falsa 123", "juan@email.com", "123456789", "pass123")
         usuario1 = Usuario(
@@ -76,7 +75,7 @@ class Controlador:
         )
         self.usuarios.append(usuario2)
 
-    def registrar_admin_demo(self):
+    def registrar_admin(self):
         """Crea admins de prueba."""
         persona_admin = Persona("Admin", "Master", "11111111Z", "Netflix HQ", "admin@netflix.com", "666666666", "adminpass")
         admin1 = Admin(
@@ -85,7 +84,7 @@ class Controlador:
         )
         self.admins.append(admin1)
 
-    # ========== MENÚ PRINCIPAL ==========
+    #  MENÚ PRINCIPAL 
 
     def mostrar_menu_principal(self):
         """Muestra menú principal de la aplicación."""
@@ -99,9 +98,9 @@ class Controlador:
         """Solicita ID para login."""
         return self.vista.pedir_id_usuario()
 
-    # ========== SESIONES ==========
+    #  SESIONES 
 
-    def login_usuario(self, id_user: str) -> bool:
+    def login_usuario(self, id_user: str):
         """Busca y establece usuario actual por ID."""
         for usuario in self.usuarios:
             if usuario.id_user == id_user:
@@ -111,7 +110,7 @@ class Controlador:
         self.vista.mostrar_mensaje(" Usuario NO encontrado.")
         return False
 
-    def login_admin(self, id_admin: str) -> bool:
+    def login_admin(self, id_admin: str):
         """Busca y establece admin actual por ID."""
         for admin in self.admins:
             if admin.id_admin == id_admin:
@@ -131,7 +130,7 @@ class Controlador:
         self.admin_actual = None
         self.vista.mostrar_mensaje("Sesión de admin cerrada.")
 
-    # ========== MENÚ USUARIO ==========
+    #  MENÚ USUARIO 
 
     def manejar_menu_usuario(self):
         """Maneja el menú del usuario actual."""
@@ -198,7 +197,7 @@ class Controlador:
         elif opcion == "4":
             return
 
-    # ========== MENÚ ADMIN ==========
+    #  MENÚ ADMIN 
 
     def manejar_menu_admin(self):
         """Maneja el menú del admin actual."""
@@ -228,9 +227,9 @@ class Controlador:
 
     def crear_contenido_admin(self):
         """Simula creación de contenido nuevo."""
-        print("\nCrear contenido (simulado - usa datos de demo)")
+        print("\nCrear contenido (simulado)")
         self.vista.mostrar_mensaje("En una versión completa pedirías todos los datos.")
-        self.crear_contenido_demo()
+        self.crear_contenido()
 
     def bloquear_usuario_admin(self):
         """Bloquea usuario seleccionado."""
@@ -262,13 +261,13 @@ class Controlador:
         else:
             self.vista.mostrar_mensaje("Contenido no encontrado.")
 
-    # ========== EJECUCIÓN PRINCIPAL ==========
+    #  EJECUCIÓN PRINCIPAL 
 
     def ejecutar(self):
         """Bucle principal de la aplicación."""
-        self.registrar_usuario_demo()
-        self.registrar_admin_demo()
-        self.crear_contenido_demo()
+        self.registrar_usuario()
+        self.registrar_admin()
+        self.crear_contenido()
 
         while True:
             self.mostrar_menu_principal()
