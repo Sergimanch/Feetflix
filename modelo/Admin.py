@@ -63,6 +63,9 @@ class Admin(Persona):
             usuario.esta_bloqueado = False
             print(f"Usuario {usuario.id_user} ha sido desbloqueado.")
 
+    def buscar_por_titulo(self, usuario: Usuario, titulo: str):
+        return usuario.buscar_contenido_por_titulo(titulo, self.catalogo)
+
     def ver_estadisticas_contenido(self, contenido: Contenido) -> None:
         """Muestra métricas de visualización y valoraciones."""
         print(f"Estadísticas de '{contenido.titulo}':")
@@ -72,7 +75,7 @@ class Admin(Persona):
     def listar_usuarios(self, lista_usuarios: list) -> None:
         """Muestra por consola la lista de todos los usuarios."""
         print("Listado de usuarios:")
-        for u in lista_usuarios:
+        for u, b in lista_usuarios:
             print(f"- {u}")
 
     def listar_contenidos(self, catalogo : list[Contenido]) -> None:

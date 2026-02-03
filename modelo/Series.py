@@ -1,9 +1,9 @@
 from modelo.Contenido import Contenido
+from datetime import date
 
 class Series(Contenido):
-    def __init__(self, categoria, nombre, descripcion, duracion, fecha_lanzamiento, num_temporadas: int, en_emision: bool):
-        super().__init__(categoria, nombre, descripcion, duracion, fecha_lanzamiento)
-        
+    def __init__(self, id_contenido: int, titulo: str, descripcion: str, genero: str, edad_minima: int, duracion_minutos: int, fecha_estreno: date, num_temporadas: int, en_emision: bool):
+        super().__init__(id_contenido, titulo, descripcion, genero, edad_minima, duracion_minutos, fecha_estreno )
         self.__num_temporadas = num_temporadas
         self.__en_emision = en_emision
         self.__temporada_actual = 1
@@ -56,7 +56,13 @@ class Series(Contenido):
         if temporada not in self.__episodios_por_temporada:
             raise ValueError(f"La temporada {temporada} no existe en esta serie.")
         return self.__episodios_por_temporada[temporada]
-
+    def reproducir_episodio(self, temporada: int, episodio: int):
+        self.reproducir()
+        print(f"Reproduciendo Temporada {temporada}, Episodio {episodio} de '{self.titulo}'.")
+        
+    def añadir_valoracion(self, valoracion):
+        return super().añadir_valoracion(valoracion)
+    
     def siguiente_episodio(self, temporada: int, episodio: int) -> tuple:
         """ Lógica simple: si el episodio actual es el último de la temporada, pasa a la siguiente temporada """
         if episodio < self.__episodios_por_temporada.get(temporada, 0):

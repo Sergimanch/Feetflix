@@ -10,20 +10,14 @@ class Pelicula(Contenido):
     reparto, idiomas y formatos disponibles.
     """
     
-    def __init__(self, id_contenido: int, titulo: str, descripcion: str,
-                 genero: str, edad_minima: int, duracion_minutos: int,
-                 fecha_estreno: date, director: str, 
-                 reparto_principal: List[str], idioma_original: str,
-                 formato: str = "HD"):
+    def __init__(self, id_contenido: int, titulo: str, descripcion: str, genero: str, edad_minima: int, duracion_minutos: int, fecha_estreno: date, director: str, reparto_principal: List[str], idioma_original: str,formato: str = "HD"):
         # Inicializar la clase padre
-        super().__init__(id_contenido, titulo, descripcion, genero,
-                        edad_minima, duracion_minutos, fecha_estreno)
-        
+        super().__init__(id_contenido, titulo, descripcion, genero, edad_minima, duracion_minutos, fecha_estreno)
         # Atributos privados específicos de Película
         self.__director = director
         self.__reparto_principal = reparto_principal
         self.__idioma_original = idioma_original
-        self.__subtitulos_disponibles: List[str] = []
+        self.__subtitulos_disponibles = []  # Lista de idiomas disponibles como subtítulos
         self.__formato = formato
     
     # Properties para director
@@ -95,6 +89,12 @@ class Pelicula(Contenido):
         return (self.__idioma_original.lower() == idioma_lower or 
                 idioma_lower in [sub.lower() for sub in self.__subtitulos_disponibles])
     
+    def añadir_valoracion(self, valoracion):
+        return super().añadir_valoracion(valoracion)
+    
+    def reproducir_pelicula(self):
+        return self.reproducir()
+
     def añadir_subtitulo(self, idioma: str):
         """Añade un idioma de subtítulos disponible.
         

@@ -2,7 +2,7 @@ from modelo.Contenido import Contenido
 from datetime import date
 class Juegos(Contenido):
     def __init__(self, id_contenido: int, titulo: str, descripcion: str, genero: str, edad_minima: int, duracion_minutos: int, fecha_estreno: date, plataformas_disponibles : list[str], multijugador : bool, tiempo_jugado : int):
-        super().__init__(id_contenido, titulo, descripcion, genero, edad_minima, duracion_minutos, fecha_estreno )
+        super().__init__(id_contenido, titulo, descripcion, genero, edad_minima, duracion_minutos, fecha_estreno)
         self.__plataformas_disponibles = plataformas_disponibles ## Movil, Consola o PC
         self.__multijuador = multijugador
         self.__tiempo_jugado = tiempo_jugado
@@ -55,7 +55,10 @@ class Juegos(Contenido):
         """Añade una plataforma nueva si no existe ya."""
         if plataforma not in self.__plataformas_disponibles:
             self.__plataformas_disponibles.append(plataforma)
-
+            
+    def añadir_valoracion(self, valoracion):
+        return super().añadir_valoracion(valoracion)
+    
     def es_largo(self) -> bool:
         """
         Considera el juego 'largo' si su duración estimada supera cierto umbral.

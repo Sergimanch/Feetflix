@@ -13,19 +13,14 @@ class Contenido:
         self.__valoraciones = []
 
 # Getters y Setters de los atributos de la clase contenido
-    @property
-    def categoria(self) -> str:
-        return self.__categoria
-    @categoria.setter
-    def categoria(self, categoria: str):
-        self.__categoria = categoria
+
 
     @property
-    def nombre(self) -> str:
-        return self.__nombre
-    @nombre.setter
-    def nombre(self, nombre: str):
-        self.__nombre = nombre
+    def titulo(self) -> str:
+        return self.__titulo
+    @titulo.setter
+    def nombre(self, titulo: str):
+        self.__titulo = titulo
 
     @property
     def descripcion(self) -> str:
@@ -47,13 +42,6 @@ class Contenido:
     @fecha_estreno.setter
     def fecha_estreno(self, fecha_estreno: date):
         self.__fecha_estreno = fecha_estreno    
-
-    @property
-    def id_contenido(self) -> int:
-        return self.__id_contenido
-    @id_contenido.setter
-    def id_contenido(self, id_contenido: int):
-        self.__id_contenido = id_contenido
 
     @property
     def titulo(self) -> str:
@@ -97,12 +85,6 @@ class Contenido:
     def reproducir(self):
         print(f"Reproduciendo {self.__titulo}...")
         self.__num_visualizaciones += 1
-    
-    def pausar(self):
-        print(f"Pausando {self.__titulo}...")
-
-    def parar(self):
-        print(f"Parando {self.__titulo}...")
 
     def añadir_valoracion(self, valoracion: int):
         self.__valoraciones.append(valoracion)
